@@ -56,15 +56,10 @@ public class HorzScrollWithListMenu extends Activity {
         scrollView.initViews(children, scrollToViewIdx, new SizeCallbackForMenu(btnSlide));
     }
 
-    /**
-     * Helper for examples with a HSV that should be scrolled by a menu View's width.
-     */
     static class ClickListenerForScrolling implements OnClickListener {
         HorizontalScrollView scrollView;
         View menu;
-        /**
-         * Menu must NOT be out/shown to start with.
-         */
+
         boolean menuOut = false;
 
         public ClickListenerForScrolling(HorizontalScrollView scrollView, View menu) {

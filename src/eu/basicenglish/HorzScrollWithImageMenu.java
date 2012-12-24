@@ -44,8 +44,6 @@ public class HorzScrollWithImageMenu extends Activity {
         btnSlide = (ImageView) tabBar.findViewById(R.id.BtnSlide);
         btnSlide.setOnClickListener(new HorzScrollWithListMenu.ClickListenerForScrolling(scrollView, menu));
 
-        // Create a transparent view that pushes the other views in the HSV to the right.
-        // This transparent view allows the menu to be shown when the HSV is scrolled.
         View transparent = new TextView(this);
         transparent.setBackgroundColor(android.R.color.transparent);
 

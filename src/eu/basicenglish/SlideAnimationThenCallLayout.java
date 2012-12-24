@@ -15,10 +15,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
 
-/**
- * Removed the flicker
- * 
- */
 public class SlideAnimationThenCallLayout extends Activity implements AnimationListener {
     View menu;
     View app;
@@ -43,24 +39,13 @@ public class SlideAnimationThenCallLayout extends Activity implements AnimationL
                 menu.setVisibility(View.VISIBLE);
                 animParams.init(left, 0, left + w, h);
             } else {
-                // anim = AnimationUtils.loadAnimation(context, R.anim.push_left_in_80);
                 anim = new TranslateAnimation(0, -left, 0, 0);
                 animParams.init(0, 0, w, h);
             }
 
             anim.setDuration(500);
             anim.setAnimationListener(me);
-            //Tell the animation to stay as it ended (we are going to set the app.layout first than remove this property)
             anim.setFillAfter(true);
-
-
-            // Only use fillEnabled and fillAfter if we don't call layout ourselves.
-            // We need to do the layout ourselves and not use fillEnabled and fillAfter because when the anim is finished
-            // although the View appears to have moved, it is actually just a drawing effect and the View hasn't moved.
-            // Therefore clicking on the screen where the button appears does not work, but clicking where the View *was* does
-            // work.
-            // anim.setFillEnabled(true);
-            // anim.setFillAfter(true);
 
             app.startAnimation(anim);
         }
@@ -87,9 +72,7 @@ public class SlideAnimationThenCallLayout extends Activity implements AnimationL
         System.out.println("layout [" + animParams.left + "," + animParams.top + "," + animParams.right + ","
                 + animParams.bottom + "]");
         app.layout(animParams.left, animParams.top, animParams.right, animParams.bottom);
-        //Now that we've set the app.layout property we can clear the animation, flicker avoided :)
         app.clearAnimation();
-
     }
 
     public void onAnimationEnd(Animation animation) {

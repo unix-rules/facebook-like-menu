@@ -10,9 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-/**
- * Utility methods for Views.
- */
 public class ViewUtils {
     private ViewUtils() {
     }

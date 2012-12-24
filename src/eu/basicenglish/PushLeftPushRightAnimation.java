@@ -13,10 +13,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ViewFlipper;
 
-/**
- * Demo of a push left/push right animation. Note that Android Animations do not move a View, they only alter the rendering of
- * the View.
- */
 public class PushLeftPushRightAnimation extends Activity implements AnimationListener {
     ViewFlipper mFlipper;
     Animation in;

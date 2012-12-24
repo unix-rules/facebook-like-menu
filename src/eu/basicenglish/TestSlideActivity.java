@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-/**
- * This demo does not work.
- */
 public class TestSlideActivity extends Activity {
     ViewGroup parentLayout;
     LinearLayout layout1;
