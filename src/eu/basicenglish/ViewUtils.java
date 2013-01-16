@@ -48,6 +48,9 @@ public class ViewUtils {
             
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Context context = view.getContext();
+                
+                // select item
+                
                 String msg = "item[" + position + "]=" + parent.getItemAtPosition(position);
                 Toast.makeText(context, msg, 1000).show();
                 System.out.println(msg);
