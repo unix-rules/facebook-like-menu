@@ -1,7 +1,7 @@
 
 package eu.basicenglish;
 
-import eu.basicenglish.MyHorizontalScrollView.SizeCallback;
+import eu.basicenglish.MainView.SizeCallback;
 import eu.basicenglish.R;
 
 import java.util.Date;
@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class HorzScrollWithListMenu extends Activity {
-    MyHorizontalScrollView scrollView;
+public class FreakActivity extends Activity {
+    MainView scrollView;
     View menu;
     View app;
     ImageView btnSlide;
@@ -33,7 +33,7 @@ public class HorzScrollWithListMenu extends Activity {
         super.onCreate(savedInstanceState);
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        scrollView = (MyHorizontalScrollView) inflater.inflate(R.layout.horz_scroll_with_list_menu, null);
+        scrollView = (MainView) inflater.inflate(R.layout.horz_scroll_with_list_menu, null);
         setContentView(scrollView);
 
         menu = inflater.inflate(R.layout.horz_scroll_menu, null);
@@ -80,7 +80,6 @@ public class HorzScrollWithListMenu extends Activity {
             menu.setVisibility(View.VISIBLE);
 
             if (!menuOut) {
-                // Scroll to 0 to reveal menu
                 int left = 0;
                 scrollView.smoothScrollTo(left, 0);
             } else {
@@ -92,10 +91,6 @@ public class HorzScrollWithListMenu extends Activity {
         }
     }
 
-    /**
-     * Helper that remembers the width of the 'slide' button, so that the 'slide' button remains in view, even when the menu is
-     * showing.
-     */
     static class SizeCallbackForMenu implements SizeCallback {
         int btnWidth;
         View btnSlide;

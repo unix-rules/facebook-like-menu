@@ -24,7 +24,7 @@
         </activity>
 -->
         <!-- Menu -->
-        <activity android:name=".HorzScrollWithListMenu" android:label="HorzScrollWithListMenu">
+        <activity android:name=".FreakActivity" android:label="HorzScrollWithListMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

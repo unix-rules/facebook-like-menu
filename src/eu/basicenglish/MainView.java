@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 
-public class MyHorizontalScrollView extends HorizontalScrollView {
-    public MyHorizontalScrollView(Context context, AttributeSet attrs, int defStyle) {
+public class MainView extends HorizontalScrollView {
+    public MainView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
 
-    public MyHorizontalScrollView(Context context, AttributeSet attrs) {
+    public MainView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public MyHorizontalScrollView(Context context) {
+    public MainView(Context context) {
         super(context);
         init(context);
     }
@@ -70,7 +70,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView {
 
         public void onGlobalLayout() {
 
-            final HorizontalScrollView me = MyHorizontalScrollView.this;
+            final HorizontalScrollView me = MainView.this;
 
             me.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             sizeCallback.onGlobalLayout();
