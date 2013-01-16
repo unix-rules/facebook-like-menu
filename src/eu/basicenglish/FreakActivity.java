@@ -14,12 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FreakActivity extends Activity {
+public class FreakActivity extends Activity implements OnClickListener {
     MainView scrollView;
     View menu;
     View app;
@@ -47,7 +46,7 @@ public class FreakActivity extends Activity {
         ViewUtils.initListView(this, listView, "Menu ", 30, android.R.layout.simple_list_item_1);
 
         btnSlide = (ImageView) tabBar.findViewById(R.id.BtnSlide);
-        btnSlide.setOnClickListener(new ClickListenerForScrolling(scrollView, menu));
+        btnSlide.setOnClickListener(this);
 
         final View[] children = new View[] { menu, app };
 
@@ -55,42 +54,33 @@ public class FreakActivity extends Activity {
         int scrollToViewIdx = 1;
         scrollView.initViews(children, scrollToViewIdx, new SizeCallbackForMenu(btnSlide));
     }
+    
+    public void switchView () {
+    	Context context = menu.getContext();
+        String msg = "Slide " + new Date();
+        Toast.makeText(context, msg, 1000).show();
+        System.out.println(msg);
 
-    static class ClickListenerForScrolling implements OnClickListener {
-        HorizontalScrollView scrollView;
-        View menu;
+        int menuWidth = menu.getMeasuredWidth();
 
-        boolean menuOut = false;
+        // Ensure menu is visible
+        menu.setVisibility(View.VISIBLE);
 
-        public ClickListenerForScrolling(HorizontalScrollView scrollView, View menu) {
-            super();
-            this.scrollView = scrollView;
-            this.menu = menu;
+        if (!menuOut) {
+            int left = 0;
+            scrollView.smoothScrollTo(left, 0);
+        } else {
+            // Scroll to menuWidth so menu isn't on screen.
+            int left = menuWidth;
+            scrollView.smoothScrollTo(left, 0);
         }
-
-        public void onClick(View v) {
-            Context context = menu.getContext();
-            String msg = "Slide " + new Date();
-            Toast.makeText(context, msg, 1000).show();
-            System.out.println(msg);
-
-            int menuWidth = menu.getMeasuredWidth();
-
-            // Ensure menu is visible
-            menu.setVisibility(View.VISIBLE);
-
-            if (!menuOut) {
-                int left = 0;
-                scrollView.smoothScrollTo(left, 0);
-            } else {
-                // Scroll to menuWidth so menu isn't on screen.
-                int left = menuWidth;
-                scrollView.smoothScrollTo(left, 0);
-            }
-            menuOut = !menuOut;
-        }
+        menuOut = !menuOut;
     }
-
+    
+    public void onClick(View v) {
+        switchView();
+    }
+    
     static class SizeCallbackForMenu implements SizeCallback {
         int btnWidth;
         View btnSlide;
