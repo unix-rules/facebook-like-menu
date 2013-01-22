@@ -10,10 +10,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -33,7 +36,10 @@ public class FreakActivity extends Activity implements OnClickListener, FreakLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
         Database database = Database.sharedInstance();
         database.categories();
         
@@ -46,37 +52,40 @@ public class FreakActivity extends Activity implements OnClickListener, FreakLis
         
         app = inflater.inflate(R.layout.main_app_view, null);
         
-        ViewGroup tabBar = (ViewGroup) app.findViewById(R.id.tabBar);
-
-        //ListView listView = (ListView) app.findViewById(R.id.list);
-        //initListView(listView, "Item ", 30, android.R.layout.simple_list_item_1);
-
         
         ListView listView = (ListView) menu.findViewById(R.id.list);
-        initListView(listView, "Menu ", 30, android.R.layout.simple_list_item_1);
+        
 
-        btnSlide = (ImageView) tabBar.findViewById(R.id.BtnSlide);
+//        public void initListView( ListView listView, String prefix, int numItems, int layout) 
+         
+        String[] arr = new String[30];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = "item";
+        }
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr));
+        listView.setOnItemClickListener(this);
+        
+        
+        btnSlide = (ImageView)app.findViewById(R.id.menu_button);
         btnSlide.setOnClickListener(this);
 
         final View[] children = new View[] { menu, app };
 
         // Scroll to app (view[1]) when layout finished.
-        int scrollToViewIdx = 1;
-        scrollView.initViews(children, scrollToViewIdx);
+        
+        scrollView.initViews(children);
         //scrollView.setMainView(app);
         //scrollView.setMenuView(menu);
         
-        scrollView.addMainListener(children, scrollToViewIdx, this);
-    }
-    
-    public void initListView( ListView listView, String prefix, int numItems, int layout) {
-        // By using setAdpater method in listview we an add string array in list.
-        String[] arr = new String[numItems];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = prefix + (i + 1);
-        }
-        listView.setAdapter(new ArrayAdapter<String>(this, layout, arr));
-        listView.setOnItemClickListener(this);
+        scrollView.addMainListener(this);
+        
+        Log.e("sd", "sdf");
+      //Remove title bar
+        
+        
+
+        //Remove notification bar
+        //
     }
     
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

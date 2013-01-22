@@ -39,7 +39,7 @@ public class MainView extends HorizontalScrollView  implements OnGlobalLayoutLis
         setVerticalFadingEdgeEnabled(false);
     }
 
-    public void initViews(View[] children, int scrollToViewIdx) {
+    public void initViews(View[] children) {
         
     	ViewGroup parent = (ViewGroup) getChildAt(0);
 
@@ -47,14 +47,16 @@ public class MainView extends HorizontalScrollView  implements OnGlobalLayoutLis
             children[i].setVisibility(View.INVISIBLE);
             parent.addView(children[i]);
         }
+        
+        this.children = children;
     }
     
-    public void addMainListener(View[] children, int scrollToViewIdx, SizeCallback sizeCallback) {
+    public void addMainListener( SizeCallback sizeCallback) {
     	ViewGroup parent = (ViewGroup) getChildAt(0);
     	
     	this.parent = parent;
-        this.children = children;
-        this.scrollToViewIdx = scrollToViewIdx;
+
+        this.scrollToViewIdx = 1;
         
         this.sizeCallback = sizeCallback;
         getViewTreeObserver().addOnGlobalLayoutListener(this);
